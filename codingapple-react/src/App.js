@@ -7,10 +7,11 @@ function App() {
   let post = '백준 2문제씩 풀기'; //자료 잠깐 저장 시 변수 사용
   let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
 
-
-  let [click, setClick] = useState(0);
+  let [click, setClick] = useState([0,0,0]);
+  let [modal, setModal] = useState(false);
 
   const clickUp = () => {
+       
        setClick(click + 1);
   }
 
@@ -19,7 +20,9 @@ function App() {
       <div className = "black-nav">
         <h4>To-Do 만들어보기</h4>
       </div>
-      <div className="list">
+
+
+      {/* <div className="list">
           <button style={{width : "250px", fontSize : "1rem", fontWeight : "bold", marginTop : "10px"}} onClick={() => {
 
               let copy = [...todo]; // todo 배열을 복사하는 의미라고 생각하면 된다.
@@ -40,17 +43,45 @@ function App() {
         <h4>{ todo[0] } <span className="clickUp" onClick= { clickUp }> 좋아요 😊 </span> {click} </h4>
         <p>작성일자</p>
       </div>
+
       <div className="list">
         <h4>{ todo[1] }</h4>
         <p>작성일자</p>
       </div>
-      <div className="list">
-        <h4>{ todo[2] }</h4>
-        <p>작성일자</p>
-      </div>
-        <Act></Act>
 
-        <Modal></Modal>
+
+      <div className="list">
+        <h4 onClick={() => setModal(modal == false ? true : false)}>{ todo[2] }</h4>
+        <p>작성일자</p>
+      </div> */}
+
+
+          {
+            //map() 을 쓰고 나면 그 자리에 [] 배열이 만들어 집니다.
+            //return 문안의 div가 array [] 자료 안에 담아주었기 때문에 html이 출력될 수 있습니다.
+              todo.map(function(data,i) {
+                return (
+                  <div className="list" key={i}>
+                    <h4 onClick={() => !modal ? setModal(true): setModal(false)}>{todo[i]}</h4>
+
+
+                    
+                    <span className="clickUp" onClick={() => {
+                      let copy = [...click];
+                      copy[i] = copy[i] + 1;
+                      setClick(copy)
+                    }}> 좋아요 😊 </span> {click[i]}
+
+
+
+                    <p>작성일자</p>
+                </div>
+                )
+              })
+          }
+
+
+          { modal == true ? <Modal/> : null }
 
     </div>
   );
@@ -67,11 +98,14 @@ function App() {
 
  function Modal() {
     return (
+      <>
+      
      <div className="modal">
-         <h5>{}</h5>
+         <h5></h5>
          <p>날짜</p>
          <p>상세 내용</p>
      </div>
+     </>
     )
  }
 
@@ -79,9 +113,7 @@ function App() {
  function Act() {
      return(
          <div>
-
              <p>우웩!!!!!!!!!!!!!!!!!!!!!!11</p>
-
          </div>
      )
  }
