@@ -119,5 +119,27 @@ function App() {
      )
  }
 
+const users = [
+   {
+     id : 1, name: "kwonminji"
+   },
+   {
+     id : 2, name : "pubao"
+   },
+   {
+     id : 3, name : "kwonnnn"
+   }
+];
+
+const userNames = users.map((user) => {
+  return user.name;
+})
+
+console.log(userNames);
+
 
 export default App;
+
+
+
+
