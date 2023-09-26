@@ -65,12 +65,13 @@ function App() {
                     <h4 onClick={() => !modal ? setModal(true): setModal(false)}>{todo[i]}</h4>
 
 
-                    
-                    <span className="clickUp" onClick={() => {
+                    <span className='clickUp' onClick={() => {
                       let copy = [...click];
                       copy[i] = copy[i] + 1;
                       setClick(copy)
-                    }}> 좋아요 😊 </span> {click[i]}
+                    }}>좋아요 👍</span>{click[i]}
+
+                    <p>{click[2]}</p>
 
 
 
