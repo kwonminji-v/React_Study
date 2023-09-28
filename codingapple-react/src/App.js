@@ -38,6 +38,11 @@ function App() {
               copy[2] = "정처기 모의고사 2회 풀기"
               setTodo(copy);
           }}> 글 제목 변경하기 </button>
+          
+          <button onClick={() => {
+              let copy = [...todo];
+              copy.sort()
+          }}>글 제목 순서대로 정렬하기</button>
 
         <h4>{ todo[0] } <span className="clickUp" onClick= { clickUp }> 좋아요 😊 </span> {click} </h4>
         <p>작성일자</p>
