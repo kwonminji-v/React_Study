@@ -4,7 +4,10 @@ import './App.css';
 
 function App() {
 
-  let [todo , setTodo] = useState(["정처기 모의고사 3개 풀어보기","백준 문제 2개씩 풀기","리액트 인강 10개 듣기"]);
+
+  let post = '백준 2문제씩 풀기'; //자료 잠깐 저장 시 변수 사용
+  let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
+
 
   let [click, setClick] = useState(0);
 
@@ -53,7 +56,9 @@ function App() {
         <p>작성일자</p>
       </div>
 
+
         <Modal></Modal>
+
     </div>
   );
 }
@@ -76,5 +81,6 @@ function App() {
      </div>
     )
  }
+
 
 export default App;
