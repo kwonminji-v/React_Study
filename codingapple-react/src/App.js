@@ -15,12 +15,6 @@ function App() {
        setClick(click + 1);
   }
 
-  /** onClick 안에는 함수 이름이 필요 ↓ 함수 만드는 법*/
-  function  함수 () {
-        console.log("으아악");
-  }
-
-
   return (
     <div className="App">
       <div className = "black-nav">
