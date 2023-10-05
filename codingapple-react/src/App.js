@@ -4,7 +4,6 @@ import './App.css';
 
 function App() {
 
-
   let post = '백준 2문제씩 풀기'; //자료 잠깐 저장 시 변수 사용
   let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
 
@@ -49,7 +48,7 @@ function App() {
         <h4>{ todo[2] }</h4>
         <p>작성일자</p>
       </div>
-
+        <Act></Act>
 
         <Modal></Modal>
 
@@ -69,11 +68,22 @@ function App() {
  function Modal() {
     return (
      <div className="modal">
-         <h5>제목</h5>
+         <h5>{}</h5>
          <p>날짜</p>
          <p>상세 내용</p>
      </div>
     )
+ }
+
+
+ function Act() {
+     return(
+         <div>
+
+             <p>우웩!!!!!!!!!!!!!!!!!!!!!!11</p>
+
+         </div>
+     )
  }
 
 
