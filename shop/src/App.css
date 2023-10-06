@@ -1,0 +1,17 @@
+
+@font-face {
+  font-family: kakao;
+  src: url("../font/KakaoBold.ttf");
+}
+
+* {
+  font-family: kakao;
+}
+
+.main-bg {
+  height: 500px;
+  background-image: url(../public/img/bg2.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
