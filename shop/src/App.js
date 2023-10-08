@@ -29,12 +29,7 @@ function App() {
         {
           datas.map((data,i) => {
             return (
-              <div className="col-md-4">
-              <img src={process.env.PUBLIC_URL + 'img/pubao'+(i+1)+'.jpg'}  width="230px" alt="" style={{border:"1px solid red"}}/>
-                <h4>사진 제목 : {datas[i].title}</h4>
-                <p>사진 내용 : {datas[i].content}</p>
-                <p>가격 : {datas[i].price}</p>
-              </div>  
+              <Card datas={datas} i={i}/>
             )
           })
         }
@@ -44,18 +39,17 @@ function App() {
   );
 }
 
-// function Component(props) {
-//   console.log(props)
-//   return (
-//     <>
-//        <div className="col-md-4">
-//           <img src={process.env.PUBLIC_URL + 'img/pubao'+(props.i)+'.jpg'}  width="230px" alt="" style={{border:"1px solid red"}}/>
-//             <h4>사진 제목 : {props.datas[props.i].title}</h4>
-//             <p>사진 내용 : {props.datas[props.i].content}</p>
-//             <p>가격 : {props.datas[props.i].price}</p>
-//           </div>   
-//     </>
-//   )
-// }
+function Card(props) {
+  return (
+    <>
+       <div className="col-md-4">
+          <img src={process.env.PUBLIC_URL + 'img/pubao'+(props.i+1)+'.jpg'}  width="230px" alt="" style={{border:"1px solid red"}}/>
+            <h4>사진 제목 : {props.datas[props.i].title}</h4>
+            <p>사진 내용 : {props.datas[props.i].content}</p>
+            <p>날짜 : {props.datas[props.i].date}</p>
+          </div>   
+    </>
+  )
+}
 
 export default App;
