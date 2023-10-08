@@ -3,6 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import data from './data'
+import { Routes, Route, Link } from "react-router-dom" 
 
 function App() {
 
@@ -12,29 +13,34 @@ function App() {
 
   return (
     <div className="App">
+
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">🌟 푸바오 🌟</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#photo">사진첩</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/photo">사진첩</Nav.Link>
             <Nav.Link href="#board">게시판</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
-      <div className="main-bg"></div>
 
-      <div className="container">
+      <Routes>
+        <Route path="/" element={<div style={{textAlign:"center",height:"50px",backgroundColor:"yellow"}}>이곳은 메인 페이지
+        <div className="main-bg"></div>
+        <div className="container">
         <div className="row">
-        {
-          datas.map((data,i) => {
-            return (
-              <Card datas={datas} i={i}/>
-            )
-          })
-        }
+          {
+            datas.map((data,i) => {
+              return (
+                <Card datas={datas} i={i}/>
+              )
+            })
+          }
         </div>
-      </div>
+      </div></div>} />
+        <Route path="/photo" element={<div style={{textAlign:"center",height:"40px",backgroundColor:"skyblue"}}>메인페이지에 게시된 사진들 보여주는 페이지</div>} />
+      </Routes>
     </div>
   );
 }
