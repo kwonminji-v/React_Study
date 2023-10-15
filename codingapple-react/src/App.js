@@ -6,13 +6,21 @@ function App() {
 
   let post = '백준 2문제씩 풀기'; //자료 잠깐 저장 시 변수 사용
   let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
+  let [title, setTitle] = useState(0);
 
   let [click, setClick] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
 
   const clickUp = () => {
-       
        setClick(click + 1);
+  }
+
+  const changeTitle = () => {
+    let copy = [...todo];
+    copy[0] = "스프링 인강 3개듣기"
+    copy[1] = "새싹 문제 3개씩 풀기"
+    copy[2] = "SqlD 문제 5개씩 풀기"
+    setTodo(copy);
   }
 
   return (
@@ -20,6 +28,71 @@ function App() {
       <div className = "black-nav">
         <h4>To-Do 만들어보기</h4>
       </div>
+          {
+            //map() 을 쓰고 나면 그 자리에 [] 배열이 만들어 집니다.
+            //return 문안의 div가 array [] 자료 안에 담아주었기 때문에 html이 출력될 수 있습니다.
+              todo.map(function(data,i) {
+                return (
+                  <div className="list" key={i}>
+                    <h4 onClick={() => {!modal ? setModal(true): setModal(false); setTitle(i);}}>{todo[i]}</h4>
+                    <span className='clickUp' onClick={() => {
+                      let copy = [...click];
+                      copy[i] = copy[i] + 1;
+                      setClick(copy)
+                    }}>좋아요 👍</span>{click[i]}
+                    <p>작성일자</p>
+                </div>
+                )
+              })
+          }
+
+          <button onClick={()=>{setTitle(0); setModal(true)}}>todo[0]</button>
+          <button onClick={()=>setTitle(1)}>todo[1]</button>
+          <button onClick={()=>setTitle(2)}>todo[2]</button>
+
+          { 
+          modal == true ? 
+          <Modal changeTitle={changeTitle}
+          title={title}
+          setTodo={setTodo} 
+          color="yellow" 
+          border="2px solid red" 
+          todo={todo} /> : null 
+          }
+
+    </div>
+  );
+}
+
+/*
+해당 컴포넌트를 사용하고 싶은 위치에서 <함수명></함수명>으로 사용할 수 있습니다.
+* function 작명() //컴포넌트 이름은 꼭 영어 대문자로 사용{
+*       return (
+*       추가 할 html 태그들을 return 문 안에 담습니다.
+*   )
+* }
+* */
+
+
+ function Modal(props) {
+    return (
+      <>
+     <div className="modal" style={{background : props.color, border : props.border,}}>
+         <h5>해야 할 일 : {props.todo[props.title]}</h5>
+         <p>날짜</p>
+         <p>상세 내용</p>
+         <button onClick={props.changeTitle}>글 제목 변경 버튼</button>
+         {/* <button onClick={props.changeTitle}>제목 변경 버튼</button> */}
+     </div>
+     </>
+    )
+ }
+
+export default App;
+
+
+
+
 
 
       {/* <div className="list">
@@ -54,92 +127,3 @@ function App() {
         <h4 onClick={() => setModal(modal == false ? true : false)}>{ todo[2] }</h4>
         <p>작성일자</p>
       </div> */}
-
-
-          {
-            //map() 을 쓰고 나면 그 자리에 [] 배열이 만들어 집니다.
-            //return 문안의 div가 array [] 자료 안에 담아주었기 때문에 html이 출력될 수 있습니다.
-              todo.map(function(data,i) {
-                return (
-                  <div className="list" key={i}>
-                    <h4 onClick={() => !modal ? setModal(true): setModal(false)}>{todo[i]}</h4>
-
-
-                    <span className='clickUp' onClick={() => {
-                      let copy = [...click];
-                      copy[i] = copy[i] + 1;
-                      setClick(copy)
-                    }}>좋아요 👍</span>{click[i]}
-
-                    <p>{click[2]}</p>
-
-
-
-                    <p>작성일자</p>
-                </div>
-                )
-              })
-          }
-
-
-          { modal == true ? <Modal/> : null }
-
-    </div>
-  );
-}
-
-/*
-해당 컴포넌트를 사용하고 싶은 위치에서 <함수명></함수명>으로 사용할 수 있습니다.
-* function 작명() //컴포넌트 이름은 꼭 영어 대문자로 사용{
-*       return (
-*       추가 할 html 태그들을 return 문 안에 담습니다.
-*   )
-* }
-* */
-
- function Modal() {
-    return (
-      <>
-      
-     <div className="modal">
-         <h5></h5>
-         <p>날짜</p>
-         <p>상세 내용</p>
-     </div>
-     </>
-    )
- }
-
-
- function Act() {
-     return(
-         <div>
-             <p>우웩!!!!!!!!!!!!!!!!!!!!!!11</p>
-         </div>
-     )
- }
-
-const users = [
-   {
-     id : 1, name: "kwonminji"
-   },
-   {
-     id : 2, name : "pubao"
-   },
-   {
-     id : 3, name : "kwonnnn"
-   }
-];
-
-const userNames = users.map((user) => {
-  return user.name;
-})
-
-console.log(userNames);
-
-
-export default App;
-
-
-
-
