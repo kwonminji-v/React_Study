@@ -6,13 +6,14 @@ function App() {
   let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
   let [title, setTitle] = useState(0);
   let [click, setClick] = useState([0,0,0,0,0,0,0,0]);
-  console.log(click)
   let [modal, setModal] = useState(false);
   let [inputData , setInputData] = useState("");
 
   let month = new Date().getMonth()+1;
   let day = new Date().getDate();
-  let today = String(month) + "월" + " " + String(day) + "일";
+  let hours = new Date().getHours();
+  let min = new Date().getMinutes();
+  let today = String(month) + "월" + " " + String(day) + "일" + " " + String(hours) + "시" +" " + String(min) + "분";
 
   const clickUp = () => {
        setClick(click + 1);
