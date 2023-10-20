@@ -5,8 +5,9 @@ import './App.css';
 function App() {
   let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
   let [title, setTitle] = useState(0);
-  let [click, setClick] = useState([0,0,0]);
+  let [click, setClick] = useState([]);
   let [modal, setModal] = useState(false);
+  let [nowDate, setNowDate] = useState(Date);
   let [inputData , setInputData] = useState("");
 
   const clickUp = () => {
@@ -40,7 +41,13 @@ function App() {
                       setClick(copy)
                     }}> 좋아요 👍</span>{click[i]}
                     </h4>
-                    <p>작성일자</p>
+                    <p>작성일자 {nowDate}</p>
+                    <button onClick={(e) => {
+                      let copy = [...todo]
+                      console.log(e)
+                      copy.splice(i,1);
+                      setTodo(copy)}}>글 삭제하기</button>
+                    <p></p>
                 </div>
                 )
               })
@@ -50,7 +57,18 @@ function App() {
             setInputData(e.target.value); 
           }}  />
 
-          <button onClick={() => {todo.unshift(inputData)}}>작성 글 추가하기</button>
+          <button onClick={(e) => {
+            if (inputData == "") {
+                e.preventDefault();
+            } else {
+            let copy = [...todo];
+            copy.unshift(inputData);
+            setTodo(copy);
+            } }
+          }
+            
+            >작성 글 추가하기
+            </button>
 
 
           { 
