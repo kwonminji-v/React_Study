@@ -5,10 +5,14 @@ import './App.css';
 function App() {
   let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
   let [title, setTitle] = useState(0);
-  let [click, setClick] = useState([]);
+  let [click, setClick] = useState([0,0,0,0,0,0,0,0]);
+  console.log(click)
   let [modal, setModal] = useState(false);
-  let [nowDate, setNowDate] = useState(Date);
   let [inputData , setInputData] = useState("");
+
+  let month = new Date().getMonth()+1;
+  let day = new Date().getDate();
+  let today = String(month) + "월" + " " + String(day) + "일";
 
   const clickUp = () => {
        setClick(click + 1);
@@ -41,7 +45,7 @@ function App() {
                       setClick(copy)
                     }}> 좋아요 👍</span>{click[i]}
                     </h4>
-                    <p>작성일자 {nowDate}</p>
+                    <p>작성일자 {today}</p>
                     <button onClick={(e) => {
                       let copy = [...todo]
                       console.log(e)
@@ -66,7 +70,6 @@ function App() {
             setTodo(copy);
             } }
           }
-            
             >작성 글 추가하기
             </button>
 
@@ -76,6 +79,7 @@ function App() {
           <Modal 
           changeTitle={changeTitle}
           title={title}
+          today={today}
           setTodo={setTodo} 
           todo={todo} /> : null 
           }
@@ -89,7 +93,8 @@ function Modal(props) {
       <>
      <div className="modal">
          <h5>해야 할 일 : {props.todo[props.title]}</h5>
-         <p>날짜</p>
+         <p>날짜 : {props.today}</p>
+         {console.log(props)}
          <p>상세 내용</p>
          <button onClick={props.changeTitle}>글 제목 변경 버튼</button>
      </div>
