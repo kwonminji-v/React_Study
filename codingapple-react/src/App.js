@@ -3,13 +3,11 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
-
-  let post = '백준 2문제씩 풀기'; //자료 잠깐 저장 시 변수 사용
   let [todo , setTodo] = useState(["리액트 인강 10개 듣기" , "백준 문제 2개씩 풀기","정처기 모의고사 3개 풀어보기"]);
   let [title, setTitle] = useState(0);
-
   let [click, setClick] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
+  let [inputData , setInputData] = useState("");
 
   const clickUp = () => {
        setClick(click + 1);
@@ -34,29 +32,33 @@ function App() {
               todo.map(function(data,i) {
                 return (
                   <div className="list" key={i}>
-                    <h4 onClick={() => {!modal ? setModal(true): setModal(false); setTitle(i);}}>{todo[i]}</h4>
-                    <span className='clickUp' onClick={() => {
+                    <h4 onClick={() => {!modal ? setModal(true): setModal(false); setTitle(i);}}>{todo[i]}
+                    <span className='clickUp' onClick={(e) => {
+                      e.stopPropagation();
                       let copy = [...click];
                       copy[i] = copy[i] + 1;
                       setClick(copy)
-                    }}>좋아요 👍</span>{click[i]}
+                    }}> 좋아요 👍</span>{click[i]}
+                    </h4>
                     <p>작성일자</p>
                 </div>
                 )
               })
           }
 
-          <button onClick={()=>{setTitle(0); setModal(true)}}>todo[0]</button>
-          <button onClick={()=>setTitle(1)}>todo[1]</button>
-          <button onClick={()=>setTitle(2)}>todo[2]</button>
+          <input type="text" onChange={(e) => { 
+            setInputData(e.target.value); 
+          }}  />
+
+          <button onClick={() => {todo.unshift(inputData)}}>작성 글 추가하기</button>
+
 
           { 
           modal == true ? 
-          <Modal changeTitle={changeTitle}
+          <Modal 
+          changeTitle={changeTitle}
           title={title}
           setTodo={setTodo} 
-          color="yellow" 
-          border="2px solid red" 
           todo={todo} /> : null 
           }
 
@@ -64,25 +66,14 @@ function App() {
   );
 }
 
-/*
-해당 컴포넌트를 사용하고 싶은 위치에서 <함수명></함수명>으로 사용할 수 있습니다.
-* function 작명() //컴포넌트 이름은 꼭 영어 대문자로 사용{
-*       return (
-*       추가 할 html 태그들을 return 문 안에 담습니다.
-*   )
-* }
-* */
-
-
- function Modal(props) {
+function Modal(props) {
     return (
       <>
-     <div className="modal" style={{background : props.color, border : props.border,}}>
+     <div className="modal">
          <h5>해야 할 일 : {props.todo[props.title]}</h5>
          <p>날짜</p>
          <p>상세 내용</p>
          <button onClick={props.changeTitle}>글 제목 변경 버튼</button>
-         {/* <button onClick={props.changeTitle}>제목 변경 버튼</button> */}
      </div>
      </>
     )
@@ -92,7 +83,7 @@ export default App;
 
 
 
-
+//state변경함수는 늦게 처리 (비동기처리)
 
 
       {/* <div className="list">
